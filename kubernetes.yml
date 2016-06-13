@@ -85,7 +85,7 @@ items:
                 value: "true"
               - name: "NODE_MASTER"
                 value: "false"
-            image: "daocloud.io/sparklxb/es:v1"
+            image: "sparklxb/docker-elasticsearch-kubernetes"
             name: "elasticsearch"
             ports:
               - containerPort: 9300
@@ -133,7 +133,7 @@ items:
                 value: "false"
               - name: "NODE_MASTER"
                 value: "true"
-            image: "daocloud.io/sparklxb/es:v1"
+            image: "sparklxb/docker-elasticsearch-kubernetes"
             name: "elasticsearch"
             ports:
               - containerPort: 9300
@@ -173,7 +173,7 @@ items:
                 value: "false"
               - name: "NODE_MASTER"
                 value: "false"
-            image: "daocloud.io/sparklxb/es:v1"
+            image: "sparklxb/docker-elasticsearch-kubernetes"
             name: "elasticsearch"
             ports:
               - containerPort: 9200
