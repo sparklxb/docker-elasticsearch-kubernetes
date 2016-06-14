@@ -1,27 +1,20 @@
-docker-elasticsearch-kubernetes
-=========================================
-
-
-背景
-============
+# docker-elasticsearch-kubernetes
 Kubernetes官方Elasticsearch示例[Elasticsearch for Kubernetes](https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/elasticsearch) 使用Elasticsearch v1.7.1的镜像。该镜像[docker-elasticsearch-kubernetes](https://github.com/pires/docker-elasticsearch-kubernetes)维护者也提供新版本的Elasticsearch。这些镜像工作原理与[Kubernetes Cloud Plugin for Elasticsearch](https://github.com/fabric8io/elasticsearch-cloud-kubernetes) 相同。后者基于[Elasticsearch官方镜像](https://github.com/docker-library/elasticsearch)，使用其插件自动pod发现，没有提供dockerfile文件。我也采用以上方法，编写dockerfile制作镜像。
 
+##所需环境
 
-所需环境
-============
 * Kubernetes集群（或Kubernetes单节点）
 * kubectl
 
 
-镜像构建（可选项）
-============
+##镜像构建（可选项）
+
 ```
 docker build -t <name>/es .
 ```
 
 
-测试
-============
+##测试
 
 ###部署
 
@@ -30,13 +23,13 @@ kubectl create -f kubernetes.yml
 ```
 
 data默认采用emptyDir volume存储，如果希望在pod销毁后，数据仍然存在，采用hostPath volume。emptyDir与hostPath区别，详见[Kubernetes - Volumes
-](http://kubernetes.io/docs/user-guide/volumes/)。运行前，对kubernetes.yml中volumes项的做如下修改，path子项填写想要挂载的文件路径。
+](http://kubernetes.io/docs/user-guide/volumes/)。运行前，kubernetes.yml中volumes项做如下修改。
 
 ```
         volumes:
           - name: "elasticsearch-data"
             hostPath:
-              path: /opt/es_data
+              path: <要挂载的主机文件路径>
 ```
 
 运行create后部署三个pod，分别作为
@@ -148,7 +141,7 @@ Session Affinity:	None
 No events.
 ```
 
-获得Endpoints和NodePort（测试集群采用NodePort）
+获得Endpoints和NodePort（此测试集群采用NodePort）
 
 在集群内任意节点运行
 
@@ -158,7 +151,7 @@ curl http://10.1.16.5:9200
 curl http://110.1.99.7:9200
 ```
 
-或在集群外的节点，以任意可访问到的集群节点IP，加NodePort运行
+或在集群外的节点，以任意可访问的集群节点IP，加NodePort运行
 
 ```
 curl http://172.24.3.164:32707
@@ -210,8 +203,8 @@ curl http://10.1.99.7:9200/_cluster/health?pretty
 }
 ```
 
-参考及致谢
-============
+##参考及致谢
+
 原镜像的github，[pires/kubernetes-elasticsearch-cluster](https://github.com/pires/kubernetes-elasticsearch-cluster)
 
 插件github及运行方法，[Kubernetes Cloud Plugin for Elasticsearch](https://github.com/fabric8io/elasticsearch-cloud-kubernetes)
