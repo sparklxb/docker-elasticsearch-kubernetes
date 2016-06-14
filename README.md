@@ -6,6 +6,10 @@ Kubernetes官方Elasticsearch示例[Elasticsearch for Kubernetes](https://github
 * Kubernetes集群（或Kubernetes单节点）
 * kubectl
 
+##文件说明
+
+* elasticsearch.yml 使用dockerfile打包镜像时，用于替换Elasticsearch官方镜像中的elasticsearch.yml，以配置Elasticsearch
+* kubernetes.yml 用以生成两个service和三个replication controller的yaml文件，使用方法见后
 
 ##镜像构建（可选项）
 
@@ -85,7 +89,7 @@ kubectl scale --replicas 2 rc/elasticsearch-client
 kubectl scale --replicas 3 rc/elasticsearch-data
 ```
 
-运行后，Master node, Client node, Data node依次增加到2, 2, 3个。
+运行后，Master node, Client node, Data node个数分别增加到2, 2, 3。
 
 检查运行是否成功
 
