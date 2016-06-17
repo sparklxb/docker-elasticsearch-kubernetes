@@ -7,7 +7,7 @@ Kubernetes官方Elasticsearch示例[Elasticsearch for Kubernetes](https://github
 * kubectl
 
 ##文件说明
-
+* service-account.yaml 生成elasticsearch账号
 * elasticsearch.yml 使用dockerfile打包镜像时，用于替换Elasticsearch官方镜像中的elasticsearch.yml，以配置Elasticsearch
 * kubernetes.yml 用以生成两个service和三个replication controller的yaml文件，使用方法见后
 
@@ -23,6 +23,7 @@ docker build -t <name>/es .
 ###部署
 
 ```
+kubectl create -f service-account.yaml
 kubectl create -f kubernetes.yml
 ```
 
